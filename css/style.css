@@ -1,0 +1,118 @@
+* {
+	box-sizing: border-box;
+}
+
+.mobile{
+    width: 375px;
+    height: auto;
+}
+
+.firstLayer{
+    width: 375px;
+    height: auto;
+    background-color: #f3f3f3;
+}
+
+
+header{
+    width: 375px;
+    height: 80px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 22px;
+    padding-right: 22px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    
+    /* box-shadow: 0px 10px 10px 0px #000;*/
+    /* margin-bottom: 50px; */
+}
+
+header img{
+    width: 75px;
+    height: auto;
+}
+
+header .iconPeople{
+    font-size: 42px;
+}
+
+main{
+    margin-top: 106px;
+    margin-bottom: 106px; /*APAGAR*/
+}
+
+footer{
+    width: 375px;
+    height: 80px;
+    background-color: #ffffff;  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 22px;
+    padding-right: 22px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+}
+
+footer input{
+    background-color: none;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: black;
+    font-style: normal;
+    outline: none;
+}
+
+footer input::placeholder {
+    font-style: italic;
+}
+
+footer .sendButton{
+    font-size: 26px;        
+}
+
+.outputSpace{
+    display: flex;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    align-items: center;
+    width: 375px;
+    height: 40px;
+    margin-bottom: 4px;
+    background-color: white;
+}
+
+.alotOfText{
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.output{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+}
+
+.time{
+    color: #aaaaaa;
+    padding-right: 7px;
+}
+
+.joinAndLeftLayout{
+    background-color: #dcdcdc;
+}
+
+.privateMessageLayout{
+    background-color: #ffdede;
+}
+
+

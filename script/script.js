@@ -154,11 +154,46 @@ function renderChat(){
     chatPromise.catch(chatErrorResponse);
 }
 
+function sendMessage(){
+    const inputTag = document.getElementById("textWrited");
+    const inputValue = inputTag.value;
+    inputTag.value = ""; //Limpando o que o usuario digitou
+    const sendableObject = {
+            from: lindoNome.name,
+            to: "Todos",
+            text: inputValue,
+            type: "message"
+        };
+
+    const sendMessagePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', sendableObject);
+    // sendMessagePromise.then(test); //mudar
+    sendMessagePromise.catch(sendMessageErrorResponse);
+}
+
+// function test(){
+//     console.log("then do sendMessagePromise");
+// }
+
+function sendMessageErrorResponse(){
+    // window.location.reload();
+    console.log("RELOAD PAGINA");
+}
+
 
 //RODANDO O PROGRAMA
 nickAnalyze();
 //keepingOnline
 renderChat();
+//chatSucessResponse primeiro plot
+
+document.getElementById("textWrited").addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        sendMessage();
+    }
+});
+
+
+
 
 
 

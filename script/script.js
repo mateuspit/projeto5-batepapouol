@@ -11,7 +11,7 @@ function lindoNomeErrorResponse(){
 }
 
 function keepingOnline(){
-    console.log("Mantendo online"); 
+    // console.log("Mantendo online"); 
     // console.log(lindoNome.name);
     lindoNomePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', lindoNome); //Mandando aviso que o nick escolhido ainda esta online
 }
@@ -32,7 +32,7 @@ function plotChat(plotChatLog){
     // chatLogGlobal = chatLogFunction;
     mainHTML = document.querySelector("main");
     mainHTML.innerHTML = "";
-    console.log("plot");
+    // console.log("plot");
     chatLogGlobal = plotChatLog;
     for(let i = 0; i < chatLogGlobal.data.length; i++){
         switch (chatLogGlobal.data[i].type) {
@@ -61,23 +61,29 @@ function plotChat(plotChatLog){
                 `;
                 break;
             case "private_message":
-                mainHTML.innerHTML += `
-                    <div class="outputSpace privateMessageLayout">
-                        <div class="time">
-                            ${chatLogGlobal.data[i].time} 
+                // console.log("MSG PRIVADA");
+                if(chatLogGlobal.data[i].from == lindoNome.name || chatLogGlobal.data[i].to == lindoNome.name){
+                    mainHTML.innerHTML += `
+                        <div class="outputSpace privateMessageLayout">
+                            <div class="time">
+                                ${chatLogGlobal.data[i].time} 
+                            </div>
+                            <div class="output">
+                            <span>${chatLogGlobal.data[i].from}</span> reservadamente para <span>${chatLogGlobal.data[i].to}</span>: ${chatLogGlobal.data[i].text}  
+                            </div>
                         </div>
-                        <div class="output">
-                        <span>${chatLogGlobal.data[i].from}</span> reservadamente para <span>${chatLogGlobal.data[i].to}</span>: ${chatLogGlobal.data[i].text}  
-                        </div>
-                    </div>
-                `;
+                    `;
+                }
                 break;
         } //switch end
-    }
+    } //for end
+    mainHTML.innerHTML += `<div class="endScroll"></div>`;
+    const elementoQueQueroQueApareca = document.querySelector('.endScroll');
+    elementoQueQueroQueApareca.scrollIntoView();
 }
 
 function refreshChat(chatLogFunction){
-    console.log("3s");
+    // console.log("3s");
     chatPromise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     chatPromise.then(plotChat);
     chatPromise.catch(chatErrorResponse);
@@ -117,30 +123,37 @@ function chatSucessResponse(chatLogFunction){
                 `;
                 break;
             case "private_message":
-                mainHTML.innerHTML += `
-                    <div class="outputSpace privateMessageLayout">
-                        <div class="time">
-                            ${chatLogFunction.data[i].time} 
+                // console.log("MSG PRIVADA CARAI")
+                if(chatLogFunction.data[i].from == lindoNome.name || chatLogFunction.data[i].to == lindoNome.name){
+                    mainHTML.innerHTML += `
+                        <div class="outputSpace privateMessageLayout">
+                            <div class="time">
+                                ${chatLogFunction.data[i].time} 
+                            </div>
+                            <div class="output">
+                            <span>${chatLogFunction.data[i].from}</span> reservadamente para <span>${chatLogFunction.data[i].to}</span>: ${chatLogFunction.data[i].text}  
+                            </div>
                         </div>
-                        <div class="output">
-                        <span>${chatLogFunction.data[i].from}</span> reservadamente para <span>${chatLogFunction.data[i].to}</span>: ${chatLogFunction.data[i].text}  
-                        </div>
-                    </div>
-                `;
+                    `;
+                }
                 break;
         } //switch end
     } //for end   
+    // debugger;
+    mainHTML.innerHTML += `<div class="endScroll"></div>`;
+    const elementoQueQueroQueApareca = document.querySelector('.endScroll');
+    elementoQueQueroQueApareca.scrollIntoView();
     // if(startRefreshChat === 0){
         // startRefreshChat = 1;
 
-    console.log("primeiro plot");
+    // console.log("primeiro plot");
     setInterval(refreshChat,3000);
         
     // }
 }
 
 function chatErrorResponse(chatLog){ //analisar erro
-    console.log("deu ruim");
+    // console.log("deu ruim");
 }
 
 function attChat(){
@@ -166,7 +179,7 @@ function sendMessage(){
         };
 
     const sendMessagePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', sendableObject);
-    // sendMessagePromise.then(test); //mudar
+    // sendMessagePromise.thgiten(test); //mudar
     sendMessagePromise.catch(sendMessageErrorResponse);
 }
 
@@ -175,8 +188,8 @@ function sendMessage(){
 // }
 
 function sendMessageErrorResponse(){
-    // window.location.reload();
-    console.log("RELOAD PAGINA");
+    window.location.reload();
+    // console.log("RELOAD PAGINA");
 }
 
 

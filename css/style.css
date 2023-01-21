@@ -66,7 +66,8 @@ footer input{
     font-size: 18px;
     color: black;
     font-style: normal;
-    outline: none;
+    /* outline: none; */
+    width: 270px;
 }
 
 footer input::placeholder {
@@ -84,10 +85,10 @@ footer .sendButton{
     display: flex;
     align-items: center;
     width: 375px;
-    height: 40px;
+    /* height: 40px; */
     margin-bottom: 4px;
     background-color: white;
-    height: auto;
+    /* height: auto; */
     padding-top: 15px;
     padding-bottom: 15px;
 }
@@ -97,6 +98,7 @@ footer .sendButton{
 } */
 
 .output{
+    width: 375px;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 400;

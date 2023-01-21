@@ -87,13 +87,14 @@ footer .sendButton{
     height: 40px;
     margin-bottom: 4px;
     background-color: white;
-}
-
-.alotOfText{
     height: auto;
     padding-top: 15px;
     padding-bottom: 15px;
 }
+
+/* .alotOfText{
+    
+} */
 
 .output{
     font-family: 'Roboto', sans-serif;
@@ -113,6 +114,10 @@ footer .sendButton{
 
 .privateMessageLayout{
     background-color: #ffdede;
+}
+
+span{
+    font-weight: 700;
 }
 
 

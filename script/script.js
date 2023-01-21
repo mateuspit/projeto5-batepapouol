@@ -38,7 +38,7 @@ function plotChat(plotChatLog){
         switch (chatLogGlobal.data[i].type) {
             case "status":
                 mainHTML.innerHTML += `
-                    <div class="outputSpace joinAndLeftLayout">
+                    <div class="outputSpace joinAndLeftLayout" data-test="message">
                         <div class="time">
                             ${chatLogGlobal.data[i].time}                        
                         </div>
@@ -50,7 +50,7 @@ function plotChat(plotChatLog){
                 break;
             case "message":
                 mainHTML.innerHTML += `
-                    <div class="outputSpace">
+                    <div class="outputSpace" data-test="message">
                         <div class="time">
                             ${chatLogGlobal.data[i].time}                         
                         </div>
@@ -64,7 +64,7 @@ function plotChat(plotChatLog){
                 // console.log("MSG PRIVADA");
                 if(chatLogGlobal.data[i].from == lindoNome.name || chatLogGlobal.data[i].to == lindoNome.name){
                     mainHTML.innerHTML += `
-                        <div class="outputSpace privateMessageLayout">
+                        <div class="outputSpace privateMessageLayout" data-test="message">
                             <div class="time">
                                 ${chatLogGlobal.data[i].time} 
                             </div>
@@ -100,7 +100,7 @@ function chatSucessResponse(chatLogFunction){
         switch (chatLogFunction.data[i].type) {
             case "status":
                 mainHTML.innerHTML += `
-                    <div class="outputSpace joinAndLeftLayout">
+                    <div class="outputSpace joinAndLeftLayout" data-test="message">
                         <div class="time">
                             ${chatLogFunction.data[i].time}                        
                         </div>
@@ -112,7 +112,7 @@ function chatSucessResponse(chatLogFunction){
                 break;
             case "message":
                 mainHTML.innerHTML += `
-                    <div class="outputSpace">
+                    <div class="outputSpace" data-test="message">
                         <div class="time">
                             ${chatLogFunction.data[i].time}                         
                         </div>
@@ -126,7 +126,7 @@ function chatSucessResponse(chatLogFunction){
                 // console.log("MSG PRIVADA CARAI")
                 if(chatLogFunction.data[i].from == lindoNome.name || chatLogFunction.data[i].to == lindoNome.name){
                     mainHTML.innerHTML += `
-                        <div class="outputSpace privateMessageLayout">
+                        <div class="outputSpace privateMessageLayout" data-test="message">
                             <div class="time">
                                 ${chatLogFunction.data[i].time} 
                             </div>
@@ -152,9 +152,9 @@ function chatSucessResponse(chatLogFunction){
     // }
 }
 
-function chatErrorResponse(chatLog){ //analisar erro
-    // console.log("deu ruim");
-}
+// function chatErrorResponse(chatLog){ //analisar erro
+//     // console.log("deu ruim");
+// }
 
 function attChat(){
         

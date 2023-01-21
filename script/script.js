@@ -16,6 +16,7 @@ function keepingOnline(){
 }
 
 function lindoNomeSucessResponse(){
+    renderChat();
     setInterval(keepingOnline, 5000); //Repetir função que avisa o servidor que ainda estamos online
 }
 
@@ -169,9 +170,6 @@ function sendMessage(){
     sendMessagePromise.catch(sendMessageErrorResponse);
 }
 
-// function test(){
-//     console.log("then do sendMessagePromise");
-// }
 
 function sendMessageErrorResponse(){
     window.location.reload();
@@ -182,7 +180,7 @@ function sendMessageErrorResponse(){
 //RODANDO O PROGRAMA
 nickAnalyze();
 //keepingOnline
-renderChat();
+// renderChat();
 //chatSucessResponse primeiro plot
 
 document.getElementById("textWrited").addEventListener("keydown", function(event){

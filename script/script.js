@@ -1,7 +1,6 @@
 let lindoNome= {}; //let pois pode variar se o usuario errar
 let lindoNomePromise; //let pois pode variar se o usuario errar
 let chatLogGlobal; //let pois varia a cada periodo de tempo definido pelo exercicio
-let startRefreshChat = 0;
 
 function lindoNomeErrorResponse(){
     lindoNome.name = prompt("Digite novamente seu nome?"); //Ocorreu um erro ao entrar com nome, provavelmente existe um nome igual a entrada
@@ -138,26 +137,15 @@ function chatSucessResponse(chatLogFunction){
                 }
                 break;
         } //switch end
-    } //for end   
-    // debugger;
+    } // for end
     mainHTML.innerHTML += `<div class="endScroll"></div>`;
     const elementoQueQueroQueApareca = document.querySelector('.endScroll');
     elementoQueQueroQueApareca.scrollIntoView();
-    // if(startRefreshChat === 0){
-        // startRefreshChat = 1;
-
-    // console.log("primeiro plot");
     setInterval(refreshChat,3000);
-        
-    // }
 }
 
-// function chatErrorResponse(chatLog){ //analisar erro
-//     // console.log("deu ruim");
-// }
-
-function attChat(){
-        
+function chatErrorResponse(chatLog){ //analisar erro
+    console.log("deu ruim");
 }
 
 function renderChat(){
@@ -179,7 +167,7 @@ function sendMessage(){
         };
 
     const sendMessagePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', sendableObject);
-    // sendMessagePromise.thgiten(test); //mudar
+    sendMessagePromise.then(plotChat); //mudar
     sendMessagePromise.catch(sendMessageErrorResponse);
 }
 
@@ -203,7 +191,7 @@ document.getElementById("textWrited").addEventListener("keydown", function(event
     if(event.key === "Enter"){
         sendMessage();
     }
-});
+})
 
 
 

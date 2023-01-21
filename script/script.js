@@ -27,28 +27,14 @@ function nickAnalyze(){
     lindoNomePromise.catch(lindoNomeErrorResponse); //Analisar erro
 }
 
-// function plotChat(){
-
-// }
-
-function refreshChat(){
-    setInterval(plotChat,3000);
-}
-
-function chatSucessResponse(chatLogFunction){
+function plotChat(plotChatLog){
     let mainHTML = "";
-    console.log("chatSucessResponse");
-    chatLogGlobal = chatLogFunction;
-    console.log(chatLogGlobal.data);
-    console.log(chatLogGlobal.data[0].time);
-    console.log(chatLogGlobal.data.length);
+    // chatLogGlobal = chatLogFunction;
     mainHTML = document.querySelector("main");
-    console.log(mainHTML);
     mainHTML.innerHTML = "";
-    // mainHTML.innerHTML = 
+    console.log("plot");
+    chatLogGlobal = plotChatLog;
     for(let i = 0; i < chatLogGlobal.data.length; i++){
-        // mainHTML.innerHTML += `<div>${chatLogGlobal.data[i].time}</div>`
-        // console.log(chatLogGlobal.data[i].type);
         switch (chatLogGlobal.data[i].type) {
             case "status":
                 mainHTML.innerHTML += `
@@ -87,12 +73,69 @@ function chatSucessResponse(chatLogFunction){
                 `;
                 break;
         } //switch end
+    }
+}
+
+function refreshChat(chatLogFunction){
+    console.log("3s");
+    chatPromise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
+    chatPromise.then(plotChat);
+    chatPromise.catch(chatErrorResponse);
+}
+
+function chatSucessResponse(chatLogFunction){
+    let mainHTML = "";
+    // chatLogGlobal = chatLogFunction;
+    mainHTML = document.querySelector("main");
+    mainHTML.innerHTML = "";
+    for(let i = 0; i < chatLogFunction.data.length; i++){
+        // mainHTML.innerHTML += `<div>${chatLogGlobal.data[i].time}</div>`
+        // console.log(chatLogGlobal.data[i].type);
+        switch (chatLogFunction.data[i].type) {
+            case "status":
+                mainHTML.innerHTML += `
+                    <div class="outputSpace joinAndLeftLayout">
+                        <div class="time">
+                            ${chatLogFunction.data[i].time}                        
+                        </div>
+                        <div class="output">
+                        <span>${chatLogFunction.data[i].from}</span> ${chatLogFunction.data[i].text} 
+                        </div>
+                    </div>                
+                `;
+                break;
+            case "message":
+                mainHTML.innerHTML += `
+                    <div class="outputSpace">
+                        <div class="time">
+                            ${chatLogFunction.data[i].time}                         
+                        </div>
+                        <div class="output">
+                            <span>${chatLogFunction.data[i].from}</span> para <span>${chatLogFunction.data[i].to}</span>: ${chatLogFunction.data[i].text}
+                        </div>
+                    </div>
+                `;
+                break;
+            case "private_message":
+                mainHTML.innerHTML += `
+                    <div class="outputSpace privateMessageLayout">
+                        <div class="time">
+                            ${chatLogFunction.data[i].time} 
+                        </div>
+                        <div class="output">
+                        <span>${chatLogFunction.data[i].from}</span> reservadamente para <span>${chatLogFunction.data[i].to}</span>: ${chatLogFunction.data[i].text}  
+                        </div>
+                    </div>
+                `;
+                break;
+        } //switch end
     } //for end   
     // if(startRefreshChat === 0){
-    //     startRefreshChat = 1;
-    //     chatPromise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
-    //     chatPromise.then(refreshChat);
-    //     chatPromise.catch(chatErrorResponse);
+        // startRefreshChat = 1;
+
+    console.log("primeiro plot");
+    setInterval(refreshChat,3000);
+        
     // }
 }
 

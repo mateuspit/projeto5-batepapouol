@@ -82,7 +82,6 @@ function plotChat(plotChatLog){
 }
 
 function refreshChat(chatLogFunction){
-    // console.log("3s");
     chatPromise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     chatPromise.then(plotChat);
     chatPromise.catch(chatErrorResponse);
@@ -122,7 +121,6 @@ function chatSucessResponse(chatLogFunction){
                 `;
                 break;
             case "private_message":
-                // console.log("MSG PRIVADA CARAI")
                 if(chatLogFunction.data[i].from == lindoNome.name || chatLogFunction.data[i].to == lindoNome.name){
                     mainHTML.innerHTML += `
                         <div class="outputSpace privateMessageLayout" data-test="message">
@@ -167,7 +165,7 @@ function sendMessage(){
         };
 
     const sendMessagePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', sendableObject);
-    sendMessagePromise.then(plotChat); //mudar
+    sendMessagePromise.then(refreshChat); //mudar
     sendMessagePromise.catch(sendMessageErrorResponse);
 }
 

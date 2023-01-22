@@ -96,6 +96,11 @@ function refreshChat(chatLogFunction){
     chatPromise.catch(chatErrorResponse);
 }
 
+function refreshSideMenu(){
+    const sideMenuPromise = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+    sideMenuPromise.then(plotSideMenu);
+}
+
 function chatSucessResponse(chatLogFunction){
     let mainHTML = "";
     // chatLogGlobal = chatLogFunction;
@@ -149,11 +154,6 @@ function chatSucessResponse(chatLogFunction){
     const elementoQueQueroQueApareca = document.querySelector('.endScroll');
     elementoQueQueroQueApareca.scrollIntoView();
     setInterval(refreshChat,3000);
-    setInterval(refreshUserList,10000);
-}
-
-function refreshUserList(){
-
 }
 
 function chatErrorResponse(chatLog){ //analisar erro
@@ -191,10 +191,10 @@ function plotSideMenu(participantesResponse){
     const elementSideMenu = document.querySelector(".sideMenu");
     const participantesList = participantesResponse;
 
-    console.log(participantesList);
-    console.log(participantesList.data);
-    console.log(participantesList.data[0]);
-    console.log(participantesList.data[0].name);
+    // console.log(participantesList);
+    // console.log(participantesList.data);
+    // console.log(participantesList.data[0]);
+    // console.log(participantesList.data[0].name);
 
 
     elementSideMenu.innerHTML = `
@@ -317,8 +317,9 @@ function openSideMenu(){
 
     const participantsPromise = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
 
-    // setInterval(participantsPromise.then(plotSideMenu),10000);
+
     participantsPromise.then(plotSideMenu);
+    setInterval(refreshSideMenu,10000);
 }
 
 function closeSideMenu(){

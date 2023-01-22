@@ -1,9 +1,10 @@
 let lindoNome= {}; //let pois pode variar se o usuario errar
 let lindoNomePromise; //let pois pode variar se o usuario errar
 let chatLogGlobal; //let pois varia a cada periodo de tempo definido pelo exercicio
+let idIntervalParticipantsRefresh = 0;
 
 function lindoNomeErrorResponse(){
-    lindoNome.name = prompt("Digite novamente seu nome?"); //Ocorreu um erro ao entrar com nome, provavelmente existe um nome igual a entrada
+    // lindoNome.name = prompt("Digite novamente seu nome?"); //Ocorreu um erro ao entrar com nome, provavelmente existe um nome igual a entrada
     lindoNomePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', lindoNome); //Tentativa de entrar com outro nome    
     lindoNomePromise.then(lindoNomeSucessResponse); //Analisar sucesso
     lindoNomePromise.catch(lindoNomeErrorResponse); //Analisar erro
@@ -16,12 +17,19 @@ function keepingOnline(){
 }
 
 function lindoNomeSucessResponse(){
+    const elementFirstLayer = document.querySelector(".firstLayer");
+    // const elementSecondLayer = document.querySelector(".secondLayer");
+    const elementThirdLayer = document.querySelector(".thirdLayer");
+    elementFirstLayer.classList.remove("hide");
+    // elementSecondLayer.classList.remove("hide");
+    elementThirdLayer.classList.add("hide");
     renderChat();
     setInterval(keepingOnline, 5000); //Repetir função que avisa o servidor que ainda estamos online
 }
 
 function nickAnalyze(){
-    lindoNome.name = prompt("Qual seu nome?"); //Primeira pergunta de nome
+    const inputNickTag = document.getElementById("nickInput");
+    lindoNome = {name: inputNickTag.value};
     lindoNomePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', lindoNome); //Envia nome escolhido
     lindoNomePromise.then(lindoNomeSucessResponse); //Analisar sucesso
     lindoNomePromise.catch(lindoNomeErrorResponse); //Analisar erro
@@ -83,7 +91,7 @@ function plotChat(plotChatLog){
 }
 
 function refreshChat(chatLogFunction){
-    chatPromise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
+    const chatPromise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     chatPromise.then(plotChat);
     chatPromise.catch(chatErrorResponse);
 }
@@ -141,6 +149,11 @@ function chatSucessResponse(chatLogFunction){
     const elementoQueQueroQueApareca = document.querySelector('.endScroll');
     elementoQueQueroQueApareca.scrollIntoView();
     setInterval(refreshChat,3000);
+    setInterval(refreshUserList,10000);
+}
+
+function refreshUserList(){
+
 }
 
 function chatErrorResponse(chatLog){ //analisar erro
@@ -148,7 +161,6 @@ function chatErrorResponse(chatLog){ //analisar erro
 }
 
 function renderChat(){
-    // console.log("renderChat")
     chatPromise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     chatPromise.then(chatSucessResponse);
     chatPromise.catch(chatErrorResponse);
@@ -173,19 +185,156 @@ function sendMessage(){
 
 function sendMessageErrorResponse(){
     window.location.reload();
-    // console.log("RELOAD PAGINA");
 }
 
+function plotSideMenu(participantesResponse){
+    const elementSideMenu = document.querySelector(".sideMenu");
+    const participantesList = participantesResponse;
 
-//RODANDO O PROGRAMA
-nickAnalyze();
-//keepingOnline
-// renderChat();
-//chatSucessResponse primeiro plot
+    console.log(participantesList);
+    console.log(participantesList.data);
+    console.log(participantesList.data[0]);
+    console.log(participantesList.data[0].name);
+
+
+    elementSideMenu.innerHTML = `
+        <div class="headerSideMenu">
+            Escolha um contato para enviar mensagem:
+        </div>
+
+        <div class="sideMenuOption">
+            <div class="iconUserSideMenuOption">
+                <div class="iconTodos">
+                    <ion-icon name="people"></ion-icon>
+                </div>
+                <div class="textTodos">
+                    Todos
+                </div>
+            </div>
+            <div class="checkSideMenuOption">
+                <ion-icon name="checkmark-sharp"></ion-icon>
+            </div>                    
+        </div>
+    `;
+
+    //colocar os participantes abaixo
+    for(let i = 0; i < participantesList.data.length; i++){
+        elementSideMenu.innerHTML += `
+        <div class="sideMenuOption">
+            <div class="iconUserSideMenuOption">
+                <div class="iconUser">
+                    <ion-icon name="person-circle"></ion-icon>
+                </div>
+                <div class="textUser">
+                    ${participantesList.data[i].name}
+                </div>         
+            </div>  
+            <div class="checkSideMenuOption hide">
+                <ion-icon name="checkmark-sharp"></ion-icon>
+            </div>          
+        </div>        
+        `;
+    }
+    
+
+    //colocar os participantes acima
+
+    elementSideMenu.innerHTML += `
+    <div class="headerTwoSideMenu">
+            Escolha a visibilidade:
+        </div>
+
+        <div class="sideMenuOption">
+            <div class="iconUserSideMenuOption">
+                <div class="iconPublic">
+                    <ion-icon name="lock-open"></ion-icon>
+                </div>
+                <div class="textPublic">
+                    Público
+                </div>   
+            </div>
+            <div class="checkSideMenuOption">
+                <ion-icon name="checkmark-sharp"></ion-icon>
+            </div>                                        
+        </div>
+
+        <div class="sideMenuOption">
+            <div class="iconUserSideMenuOption">
+                <div class="iconPrivate">
+                    <ion-icon name="lock-closed"></ion-icon>
+                </div>
+                <div class="textPrivate">
+                    Reservadamente
+                </div>   
+            </div>
+            <div class="checkSideMenuOption">
+                <ion-icon name="checkmark-sharp hide"></ion-icon>
+            </div>               
+        </div>
+    `;
+
+
+
+
+
+        // <div class="sideMenuOption">
+        //     <div class="iconUserSideMenuOption">
+        //         <div class="iconUser">
+        //             <ion-icon name="person-circle"></ion-icon>
+        //         </div>
+        //         <div class="textUser">
+        //             João
+        //         </div>         
+        //     </div>  
+        //     <div class="checkSideMenuOption hide">
+        //         <ion-icon name="checkmark-sharp"></ion-icon>
+        //     </div>          
+        // </div>
+
+    //     <div class="sideMenuOption">
+    //         <div class="iconUserSideMenuOption">                    
+    //             <div class="iconUser">
+    //                 <ion-icon name="person-circle"></ion-icon>
+    //             </div>
+    //             <div class="textUser">
+    //                 Maria
+    //             </div>   
+    //         </div>  
+    //         <div class="checkSideMenuOption hide">
+    //             <ion-icon name="checkmark-sharp"></ion-icon>
+    //         </div>                 
+    //     </div>
+
+    //     
+    // `;
+}
+
+function openSideMenu(){
+    const elementSecondLayer = document.querySelector(".secondLayer");
+    elementSecondLayer.classList.remove("hide");
+
+    // console.log(elementSideMenu);
+
+    const participantsPromise = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+
+    // setInterval(participantsPromise.then(plotSideMenu),10000);
+    participantsPromise.then(plotSideMenu);
+}
+
+function closeSideMenu(){
+    const elementSecondLayer = document.querySelector(".secondLayer");
+    elementSecondLayer.classList.add("hide");
+}
 
 document.getElementById("textWrited").addEventListener("keydown", function(event){
     if(event.key === "Enter"){
         sendMessage();
+    }
+})
+
+document.getElementById("nickInput").addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        nickAnalyze();
     }
 })
 

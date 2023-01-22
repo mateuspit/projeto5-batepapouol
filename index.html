@@ -14,102 +14,16 @@
 </head>
 <body>
     <div class="mobile">
-        <div class="firstLayer">
+        <div class="firstLayer hide">
             <header>
                 <div class="logoUol">
                     <img src="./img/logo1.png" alt="Logo UOL">
                 </div>
-                <div class="iconPeople">
+                <div class="iconPeople" onclick="openSideMenu()">
                     <ion-icon name="people"></ion-icon>
                 </div>
             </header>
             <main>
-                <!-- <div class="outputSpace joinAndLeftLayout">
-                    <div class="time">
-                        (time)                        
-                    </div>
-                    <div class="output">
-                        (joinMessage) 
-                    </div>
-                </div>
-                <div class="outputSpace">
-                    <div class="time">
-                        (time)                        
-                    </div>
-                    <div class="output">
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                       
-                    </div>
-                </div>
-                <div class="outputSpace">
-                    <div class="time">
-                        (time)                        
-                    </div>
-                    <div class="output">
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-
-                    </div>
-                </div>
-                <div class="outputSpace privateMessageLayout">
-                    <div class="time">
-                        (time)
-                    </div>
-                    <div class="output">
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                        (typeMessage) (Message)  
-                    </div>
-                </div>
-                <div class="outputSpace joinAndLeftLayout">
-                    <div class="time">
-                        (time)
-                    </div>
-                    <div class="output">
-                        (leftMessage) 
-                    </div>
-                </div> -->
-                <!-- <div class="outputSpace">
-                    <div class="time">
-                        time                         
-                    </div>
-                    <div class="output">
-                        <span>nomegraeeeeeeeeeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeeeeeeee</span> para <span>grandeeee</span>: $Se eu esrever um texto grande não tem problema nenhuma desde que existam varios espaços entre as letras 
-                    </div>
-                </div> -->
-
-
-                <!-- <div class="output joinAndLeftLayout">
-                    (time) (joinMessage)                    
-                </div>
-                <div class="output">
-                    (time) (publicMessage) (Message)                      
-                </div>
-                <div class="output">
-                    (time) (publicMessage) (Message)
-                </div>
-                <div class="output privateMessageLayout">
-                    (time) (privateMessage) (Message)                     
-                </div>
-                <div class="output joinAndLeftLayout">
-                    (time) (leftMessage)                     
-                </div> -->
             </main>
             <footer>
                 <div class="writeSpace">
@@ -119,6 +33,114 @@
                     <ion-icon name="paper-plane-outline"></ion-icon>
                 </div>
             </footer>
+        </div>
+        <div class="secondLayer hide">
+            <div onclick="closeSideMenu()" class="blackTransparent">                
+            </div>            
+            <div class="sideMenu">
+                <!-- <div class="headerSideMenu">
+                    Escolha um contato para enviar mensagem:
+                </div>
+
+                <div class="sideMenuOption">
+                    <div class="iconUserSideMenuOption">
+                        <div class="iconTodos">
+                            <ion-icon name="people"></ion-icon>
+                        </div>
+                        <div class="textTodos">
+                            Todos
+                        </div>
+                    </div>
+                    <div class="checkSideMenuOption hide">
+                        <ion-icon name="checkmark-sharp"></ion-icon>
+                    </div>                    
+                </div>
+
+                <div class="sideMenuOption">
+                    <div class="iconUserSideMenuOption">
+                        <div class="iconUser">
+                            <ion-icon name="person-circle"></ion-icon>
+                        </div>
+                        <div class="textUser">
+                            João
+                        </div>         
+                    </div>  
+                    <div class="checkSideMenuOption hide">
+                        <ion-icon name="checkmark-sharp"></ion-icon>
+                    </div>          
+                </div>
+
+                <div class="sideMenuOption">
+                    <div class="iconUserSideMenuOption">                    
+                        <div class="iconUser">
+                            <ion-icon name="person-circle"></ion-icon>
+                        </div>
+                        <div class="textUser">
+                            Maria
+                        </div>   
+                    </div>  
+                    <div class="checkSideMenuOption hide">
+                        <ion-icon name="checkmark-sharp"></ion-icon>
+                    </div>                 
+                </div>
+
+                <div class="headerTwoSideMenu">
+                    Escolha a visibilidade:
+                </div>
+
+                <div class="sideMenuOption">
+                    <div class="iconUserSideMenuOption">
+                        <div class="iconPublic">
+                            <ion-icon name="lock-open"></ion-icon>
+                        </div>
+                        <div class="textPublic">
+                            Público
+                        </div>   
+                    </div>
+                    <div class="checkSideMenuOption hide">
+                        <ion-icon name="checkmark-sharp"></ion-icon>
+                    </div>                                        
+                </div>
+
+                <div class="sideMenuOption">
+                    <div class="iconUserSideMenuOption">
+                        <div class="iconPrivate">
+                            <ion-icon name="lock-closed"></ion-icon>
+                        </div>
+                        <div class="textPrivate">
+                            Reservadamente
+                        </div>   
+                    </div>
+                    <div class="checkSideMenuOption">
+                        <ion-icon name="checkmark-sharp hide"></ion-icon>
+                    </div>               
+                </div> -->
+                
+            </div>
+        </div>
+        <div class="thirdLayer">
+            <div class="login">
+                <div class="logo">
+                    <img src="./img/logo1.png" alt="Logo na tela de login" width="130px">
+                </div>
+                <div class="nickAlreadyUsed hide">
+                    Escolha outro nick, este está em uso.
+                </div>
+                <div class="inputLogin">
+                    <input id="nickInput" type="text" placeholder="Digite seu nome" />
+                </div>    
+                <div onclick="nickAnalyze()"class="buttonLogin">
+                    Entrar
+                </div>
+                <div class="gifAndTextLoading hide">
+                    <div class="gifLoading">                    
+                        <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" alt="Gif de loading" width="100px">
+                    </div>
+                    <div class="textLoading">
+                        Entrando...
+                    </div>
+                </div>                                            
+            </div>
         </div>
     </div>
     

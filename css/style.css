@@ -2,6 +2,10 @@
 	box-sizing: border-box;
 }
 
+body{
+    background-color: #f3f3f3;
+}
+
 .mobile{
     width: 375px;
     height: auto;
@@ -11,6 +15,149 @@
     width: 375px;
     height: auto;
     background-color: #f3f3f3;
+}
+
+.secondLayer{
+    width: 375px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 5;  
+    display: flex;  
+}
+
+.blackTransparent{
+    width: 100px;
+    height: 100vw;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.sideMenu{
+    width: 275px;
+    height: 100vw;
+    background-color: white;
+}
+
+.headerSideMenu{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color:  black;
+    font-weight: 700; 
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.textTodos, .textUser, .textPublic, .textPrivate{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color:  black;
+    font-weight: 400;     
+}
+
+.headerTwoSideMenu{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color:  black;
+    font-weight: 700; 
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.sideMenuOption{
+    display: flex;
+    justify-content: space-between;
+}
+
+.iconUserSideMenuOption{
+    display: flex;
+    margin-left: 18px;
+    justify-content: center;
+}
+
+.checkSideMenuOption{
+    margin-right: 27px;
+    font-size: 17px;
+    color: #28bb25;
+}
+
+.iconUser, .iconTodos, .iconPublic, .iconPrivate{
+    font-size: 21px;
+    margin-right: 8px;
+}
+
+
+
+.nickAlreadyUsed{
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    color:  black;
+    font-weight: 700;
+}
+
+.textLoading{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color:  black;
+    font-weight: 700;  
+    text-align: center;  
+}
+
+.login{
+    width: 375px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gifAndTextLoading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login img{
+    /* margin-left: 122px; */
+    margin-top: 72px;
+    margin-bottom: 94px;
+}
+
+.gifLoading img{
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.inputLogin input{
+    text-align: center;
+    width: 261px;
+    height: 54px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color:  #AEAEAE;
+    font-weight: 400;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;    
+}
+
+.buttonLogin{
+    cursor: pointer;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 189px;
+    height: 45px;
+    background-color: #E7E7E7;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color:  #696969;
+    font-weight: 400;
+    border-radius: 9px;    
 }
 
 
@@ -24,6 +171,7 @@ header{
     padding-left: 22px;
     padding-right: 22px;
     position: fixed;
+    z-index: 0;
     top: 0px;
     left: 0px;
     
@@ -55,6 +203,7 @@ footer{
     padding-left: 22px;
     padding-right: 22px;
     position: fixed;
+    z-index: 0;
     bottom: 0px;
     left: 0px;
 }
@@ -82,7 +231,6 @@ footer .sendButton{
     display: flex;
     padding-left: 8px;
     padding-right: 8px;
-    display: flex;
     align-items: center;
     width: 375px;
     /* height: 40px; */
@@ -120,6 +268,10 @@ footer .sendButton{
 
 span{
     font-weight: 700;
+}
+
+.hide{
+    display: none;
 }
 
 

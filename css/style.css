@@ -28,13 +28,13 @@ body{
 
 .blackTransparent{
     width: 100px;
-    height: 500vw;
+    height: 100vh;
     background-color: rgba(0,0,0,0.5);
 }
 
 .sideMenu{
     width: 275px;
-    height: 500vw;
+    height: 100vh;
     background-color: white;
 }
 

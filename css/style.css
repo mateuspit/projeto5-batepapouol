@@ -50,7 +50,7 @@ body{
     margin-bottom: 25px;
 }
 
-.textTodos, .textUser, .textPublic, .textPrivate{
+.textTodos, .textUser, .textType{
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color:  black;
@@ -68,6 +68,12 @@ body{
     margin-bottom: 25px;
 }
 
+.checkSideMenuOptionType, .checkSideMenuOptionUser{
+    color: #28bb25;
+    margin-right: 27px;
+    font-size: 17px;
+}
+
 .sideMenuOption{
     display: flex;
     justify-content: space-between;
@@ -77,13 +83,10 @@ body{
     display: flex;
     margin-left: 18px;
     justify-content: center;
+    cursor: pointer;
 }
 
-.checkSideMenuOption{
-    margin-right: 27px;
-    font-size: 17px;
-    color: #28bb25;
-}
+
 
 .iconUser, .iconTodos, .iconPublic, .iconPrivate{
     font-size: 21px;

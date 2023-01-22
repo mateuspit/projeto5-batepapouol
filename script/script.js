@@ -2,6 +2,9 @@ let lindoNome= {}; //let pois pode variar se o usuario errar
 let lindoNomePromise; //let pois pode variar se o usuario errar
 let chatLogGlobal; //let pois varia a cada periodo de tempo definido pelo exercicio
 let idIntervalParticipantsRefresh = 0;
+let messageTo = "Todos";
+let messageType = "message";
+let participantesLogGlobal;
 
 function lindoNomeErrorResponse(){
     // lindoNome.name = prompt("Digite novamente seu nome?"); //Ocorreu um erro ao entrar com nome, provavelmente existe um nome igual a entrada
@@ -172,9 +175,9 @@ function sendMessage(){
     inputTag.value = ""; //Limpando o que o usuario digitou
     const sendableObject = {
             from: lindoNome.name,
-            to: "Todos",
+            to: messageTo,
             text: inputValue,
-            type: "message"
+            type: messageType
         };
 
     const sendMessagePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', sendableObject);
@@ -189,89 +192,154 @@ function sendMessageErrorResponse(){
 
 function plotSideMenu(participantesResponse){
     const elementSideMenu = document.querySelector(".sideMenu");
-    const participantesList = participantesResponse;
+    // console.log("participantesResponse:" + participantesResponse);
+    // console.log("participantesLogGlobal:" + participantesLogGlobal);
+    // console.log("participantesResponse:" + participantesResponse != undefined);
+    if(participantesResponse != undefined){
+        participantesLogGlobal = participantesResponse;        
+    }
+    const participantesList = participantesLogGlobal;
+    // console.log("participantesResponse:" + participantesResponse);
+    // console.log("participantesLogGlobal:" + participantesLogGlobal);
+    // console.log("participantesList:" + participantesList);
 
-    // console.log(participantesList);
-    // console.log(participantesList.data);
-    // console.log(participantesList.data[0]);
-    // console.log(participantesList.data[0].name);
-
-
-    elementSideMenu.innerHTML = `
-        <div class="headerSideMenu">
-            Escolha um contato para enviar mensagem:
-        </div>
-
-        <div class="sideMenuOption">
-            <div class="iconUserSideMenuOption">
-                <div class="iconTodos">
-                    <ion-icon name="people"></ion-icon>
-                </div>
-                <div class="textTodos">
-                    Todos
-                </div>
+    if(messageTo == "Todos"){
+        elementSideMenu.innerHTML = `
+            <div class="headerSideMenu">
+                Escolha um contato para enviar mensagem:
             </div>
-            <div class="checkSideMenuOption">
-                <ion-icon name="checkmark-sharp"></ion-icon>
-            </div>                    
-        </div>
-    `;
+
+            <div class="sideMenuOption">
+                <div onclick="sendMessageTo(this)" class="iconUserSideMenuOption">
+                    <div class="iconTodos">
+                        <ion-icon name="people"></ion-icon>
+                    </div>
+                    <div class="textUser">Todos</div>
+                </div>
+                <div class="checkSideMenuOptionUser">
+                    <ion-icon name="checkmark-sharp"></ion-icon>
+                </div>                    
+            </div>
+        `;
+    }
+    else {
+        elementSideMenu.innerHTML = `
+            <div class="headerSideMenu">
+                Escolha um contato para enviar mensagem:
+            </div>
+
+            <div class="sideMenuOption">
+                <div onclick="sendMessageTo(this)" class="iconUserSideMenuOption">
+                    <div class="iconTodos">
+                        <ion-icon name="people"></ion-icon>
+                    </div>
+                    <div class="textUser">Todos</div>
+                </div>
+                <div class="checkSideMenuOptionUser hide">
+                    <ion-icon name="checkmark-sharp"></ion-icon>
+                </div>                    
+            </div>
+        `;        
+    }
 
     //colocar os participantes abaixo
     for(let i = 0; i < participantesList.data.length; i++){
-        elementSideMenu.innerHTML += `
-        <div class="sideMenuOption">
-            <div class="iconUserSideMenuOption">
-                <div class="iconUser">
-                    <ion-icon name="person-circle"></ion-icon>
-                </div>
-                <div class="textUser">
-                    ${participantesList.data[i].name}
-                </div>         
-            </div>  
-            <div class="checkSideMenuOption hide">
-                <ion-icon name="checkmark-sharp"></ion-icon>
-            </div>          
-        </div>        
-        `;
+        if(messageTo == participantesList.data[i].name){
+            elementSideMenu.innerHTML += `
+                <div class="sideMenuOption">
+                    <div onclick="sendMessageTo(this)" class="iconUserSideMenuOption">
+                        <div class="iconUser">
+                            <ion-icon name="person-circle"></ion-icon>
+                        </div>
+                        <div class="textUser">${participantesList.data[i].name}</div>         
+                    </div>  
+                    <div class="checkSideMenuOptionUser">
+                        <ion-icon name="checkmark-sharp"></ion-icon>
+                    </div>          
+                </div>        
+            `;
+        }
+        else{
+            elementSideMenu.innerHTML += `
+                <div class="sideMenuOption">
+                    <div onclick="sendMessageTo(this)" class="iconUserSideMenuOption">
+                        <div class="iconUser">
+                            <ion-icon name="person-circle"></ion-icon>
+                        </div>
+                        <div class="textUser">${participantesList.data[i].name}</div>         
+                    </div>  
+                    <div class="checkSideMenuOptionUser hide">
+                        <ion-icon name="checkmark-sharp"></ion-icon>
+                    </div>          
+                </div>        
+            `;            
+        }
     }
     
 
     //colocar os participantes acima
-
-    elementSideMenu.innerHTML += `
-    <div class="headerTwoSideMenu">
-            Escolha a visibilidade:
-        </div>
-
-        <div class="sideMenuOption">
-            <div class="iconUserSideMenuOption">
-                <div class="iconPublic">
-                    <ion-icon name="lock-open"></ion-icon>
+    if(messageType == "message"){
+        elementSideMenu.innerHTML += `
+            <div class="headerTwoSideMenu">
+                    Escolha a visibilidade:
                 </div>
-                <div class="textPublic">
-                    Público
-                </div>   
-            </div>
-            <div class="checkSideMenuOption">
-                <ion-icon name="checkmark-sharp"></ion-icon>
-            </div>                                        
-        </div>
 
-        <div class="sideMenuOption">
-            <div class="iconUserSideMenuOption">
-                <div class="iconPrivate">
-                    <ion-icon name="lock-closed"></ion-icon>
+                <div class="sideMenuOption">
+                    <div onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
+                        <div class="iconPublic">
+                            <ion-icon name="lock-open"></ion-icon>
+                        </div>
+                        <div class="textType">Público</div>   
+                    </div>
+                    <div class="checkSideMenuOptionType">
+                        <ion-icon name="checkmark-sharp"></ion-icon>
+                    </div>                                        
                 </div>
-                <div class="textPrivate">
-                    Reservadamente
-                </div>   
-            </div>
-            <div class="checkSideMenuOption">
-                <ion-icon name="checkmark-sharp hide"></ion-icon>
-            </div>               
-        </div>
-    `;
+
+                <div class="sideMenuOption">
+                    <div onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
+                        <div class="iconPrivate">
+                            <ion-icon name="lock-closed"></ion-icon>
+                        </div>
+                        <div class="textType">Reservadamente</div>   
+                    </div>
+                    <div class="checkSideMenuOptionType hide">
+                        <ion-icon name="checkmark-sharp"></ion-icon>
+                    </div>               
+                </div>
+            `;
+    }
+    else{
+        elementSideMenu.innerHTML += `
+            <div class="headerTwoSideMenu">
+                    Escolha a visibilidade:
+                </div>
+
+                <div class="sideMenuOption">
+                    <div onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
+                        <div class="iconPublic">
+                            <ion-icon name="lock-open"></ion-icon>
+                        </div>
+                        <div class="textType">Público</div>   
+                    </div>
+                    <div class="checkSideMenuOptionType hide">
+                        <ion-icon name="checkmark-sharp"></ion-icon>
+                    </div>                                        
+                </div>
+
+                <div class="sideMenuOption">
+                    <div onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
+                        <div class="iconPrivate">
+                            <ion-icon name="lock-closed"></ion-icon>
+                        </div>
+                        <div class="textType">Reservadamente</div>   
+                    </div>
+                    <div class="checkSideMenuOptionType">
+                        <ion-icon name="checkmark-sharp"></ion-icon>
+                    </div>               
+                </div>
+            `;        
+    }
 
 
 
@@ -309,6 +377,33 @@ function plotSideMenu(participantesResponse){
     // `;
 }
 
+function sendMessageTo(thisUser){
+    // alert("usuario");
+    const elementUserTag = thisUser.querySelector(".textUser");
+    const elementUser = elementUserTag.innerHTML;
+    // console.log(elementUserTag);
+    // console.log(elementUser);
+    messageTo = elementUser;
+    plotSideMenu();
+}
+
+function choiceMessageType(thisType){
+    // alert("usuario");
+    const elementTypeTag = thisType.querySelector(".textType");
+    const elementType = elementTypeTag.innerHTML;
+    // console.log(elementUserTag);
+    // console.log(elementUser);
+    // messageTo = elementUser;
+    if(elementType == "Público"){
+        messageType = "message";
+    }
+    else if (elementType == "Reservadamente"){
+        messageType = "private_message";
+    }
+    // messageType
+    plotSideMenu();        
+}
+
 function openSideMenu(){
     const elementSecondLayer = document.querySelector(".secondLayer");
     elementSecondLayer.classList.remove("hide");
@@ -319,12 +414,13 @@ function openSideMenu(){
 
 
     participantsPromise.then(plotSideMenu);
-    setInterval(refreshSideMenu,10000);
+    idIntervalParticipantsRefresh = setInterval(refreshSideMenu,10000);
 }
 
 function closeSideMenu(){
     const elementSecondLayer = document.querySelector(".secondLayer");
     elementSecondLayer.classList.add("hide");
+    clearInterval(idIntervalParticipantsRefresh);
 }
 
 document.getElementById("textWrited").addEventListener("keydown", function(event){

@@ -12,6 +12,8 @@ function lindoNomeErrorResponse(){
     // lindoNomePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', lindoNome); //Tentativa de entrar com outro nome    
     // lindoNomePromise.then(lindoNomeSucessResponse); //Analisar sucesso
     // lindoNomePromise.catch(lindoNomeErrorResponse); //Analisar erro
+    alert("Este nome já está em uso!");
+    window.location.reload();
     const elementTagNickError = document.querySelector(".nickAlreadyUsed");
     elementTagNickError.classList.remove("hide");
     const elementLoading = document.querySelector(".gifAndTextLoading")
@@ -179,7 +181,7 @@ function chatSucessResponse(chatLogFunction){
 }
 
 function chatErrorResponse(chatLog){ //analisar erro
-    console.log("deu ruim");
+    // console.log("deu ruim");
 }
 
 function renderChat(){
@@ -429,7 +431,7 @@ function choiceMessageType(thisType){
 
 function sendToWho(){
     const elementToFrom = document.querySelector(".toFromType")
-    console.log(elementToFrom);    
+    // console.log(elementToFrom);    
     elementToFrom.innerHTML = `
     Enviando para ${messageTo} (${messageTypeHigh})   
     `;

@@ -4,13 +4,22 @@ let chatLogGlobal; //let pois varia a cada periodo de tempo definido pelo exerci
 let idIntervalParticipantsRefresh = 0;
 let messageTo = "Todos";
 let messageType = "message";
+let messageTypeHigh = "Público";
 let participantesLogGlobal;
 
 function lindoNomeErrorResponse(){
     // lindoNome.name = prompt("Digite novamente seu nome?"); //Ocorreu um erro ao entrar com nome, provavelmente existe um nome igual a entrada
-    lindoNomePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', lindoNome); //Tentativa de entrar com outro nome    
-    lindoNomePromise.then(lindoNomeSucessResponse); //Analisar sucesso
-    lindoNomePromise.catch(lindoNomeErrorResponse); //Analisar erro
+    // lindoNomePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', lindoNome); //Tentativa de entrar com outro nome    
+    // lindoNomePromise.then(lindoNomeSucessResponse); //Analisar sucesso
+    // lindoNomePromise.catch(lindoNomeErrorResponse); //Analisar erro
+    const elementTagNickError = document.querySelector(".nickAlreadyUsed");
+    elementTagNickError.classList.remove("hide");
+    const elementLoading = document.querySelector(".gifAndTextLoading")
+    const elementButtonLogin = document.querySelector(".buttonLogin")
+    const elementInputLogin = document.querySelector(".inputLogin")
+    elementLoading.classList.add("hide")
+    elementButtonLogin.classList.remove("hide")
+    elementInputLogin.classList.remove("hide") 
 }
 
 function keepingOnline(){
@@ -36,6 +45,16 @@ function nickAnalyze(){
     lindoNomePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', lindoNome); //Envia nome escolhido
     lindoNomePromise.then(lindoNomeSucessResponse); //Analisar sucesso
     lindoNomePromise.catch(lindoNomeErrorResponse); //Analisar erro
+    const elementLoading = document.querySelector(".gifAndTextLoading");
+    const elementButtonLogin = document.querySelector(".buttonLogin");
+    const elementInputLogin = document.querySelector(".inputLogin");
+    elementLoading.classList.remove("hide");
+    elementButtonLogin.classList.add("hide");
+    elementInputLogin.classList.add("hide");
+    const elementTagNickError = document.querySelector(".nickAlreadyUsed");
+    elementTagNickError.classList.add("hide");
+    
+    
 }
 
 function plotChat(plotChatLog){
@@ -209,14 +228,14 @@ function plotSideMenu(participantesResponse){
                 Escolha um contato para enviar mensagem:
             </div>
 
-            <div class="sideMenuOption">
+            <div data-test="all" class="sideMenuOption">
                 <div onclick="sendMessageTo(this)" class="iconUserSideMenuOption">
                     <div class="iconTodos">
                         <ion-icon name="people"></ion-icon>
                     </div>
                     <div class="textUser">Todos</div>
                 </div>
-                <div class="checkSideMenuOptionUser">
+                <div data-test="check" class="checkSideMenuOptionUser">
                     <ion-icon name="checkmark-sharp"></ion-icon>
                 </div>                    
             </div>
@@ -228,14 +247,14 @@ function plotSideMenu(participantesResponse){
                 Escolha um contato para enviar mensagem:
             </div>
 
-            <div class="sideMenuOption">
+            <div data-test="all" class="sideMenuOption">
                 <div onclick="sendMessageTo(this)" class="iconUserSideMenuOption">
                     <div class="iconTodos">
                         <ion-icon name="people"></ion-icon>
                     </div>
                     <div class="textUser">Todos</div>
                 </div>
-                <div class="checkSideMenuOptionUser hide">
+                <div data-test="check" class="checkSideMenuOptionUser hide">
                     <ion-icon name="checkmark-sharp"></ion-icon>
                 </div>                    
             </div>
@@ -247,13 +266,13 @@ function plotSideMenu(participantesResponse){
         if(messageTo == participantesList.data[i].name){
             elementSideMenu.innerHTML += `
                 <div class="sideMenuOption">
-                    <div onclick="sendMessageTo(this)" class="iconUserSideMenuOption">
+                    <div data-test="participant" onclick="sendMessageTo(this)" class="iconUserSideMenuOption">
                         <div class="iconUser">
                             <ion-icon name="person-circle"></ion-icon>
                         </div>
                         <div class="textUser">${participantesList.data[i].name}</div>         
                     </div>  
-                    <div class="checkSideMenuOptionUser">
+                    <div data-test="check" class="checkSideMenuOptionUser">
                         <ion-icon name="checkmark-sharp"></ion-icon>
                     </div>          
                 </div>        
@@ -262,13 +281,13 @@ function plotSideMenu(participantesResponse){
         else{
             elementSideMenu.innerHTML += `
                 <div class="sideMenuOption">
-                    <div onclick="sendMessageTo(this)" class="iconUserSideMenuOption">
+                    <div data-test="participant" onclick="sendMessageTo(this)" class="iconUserSideMenuOption">
                         <div class="iconUser">
                             <ion-icon name="person-circle"></ion-icon>
                         </div>
                         <div class="textUser">${participantesList.data[i].name}</div>         
                     </div>  
-                    <div class="checkSideMenuOptionUser hide">
+                    <div data-test="check" class="checkSideMenuOptionUser hide">
                         <ion-icon name="checkmark-sharp"></ion-icon>
                     </div>          
                 </div>        
@@ -285,25 +304,25 @@ function plotSideMenu(participantesResponse){
                 </div>
 
                 <div class="sideMenuOption">
-                    <div onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
+                    <div data-test="public" onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
                         <div class="iconPublic">
                             <ion-icon name="lock-open"></ion-icon>
                         </div>
                         <div class="textType">Público</div>   
                     </div>
-                    <div class="checkSideMenuOptionType">
+                    <div data-test="check" class="checkSideMenuOptionType">
                         <ion-icon name="checkmark-sharp"></ion-icon>
                     </div>                                        
                 </div>
 
                 <div class="sideMenuOption">
-                    <div onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
+                    <div data-test="private" onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
                         <div class="iconPrivate">
                             <ion-icon name="lock-closed"></ion-icon>
                         </div>
                         <div class="textType">Reservadamente</div>   
                     </div>
-                    <div class="checkSideMenuOptionType hide">
+                    <div data-test="check" class="checkSideMenuOptionType hide">
                         <ion-icon name="checkmark-sharp"></ion-icon>
                     </div>               
                 </div>
@@ -316,25 +335,25 @@ function plotSideMenu(participantesResponse){
                 </div>
 
                 <div class="sideMenuOption">
-                    <div onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
+                    <div data-test="public" onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
                         <div class="iconPublic">
                             <ion-icon name="lock-open"></ion-icon>
                         </div>
                         <div class="textType">Público</div>   
                     </div>
-                    <div class="checkSideMenuOptionType hide">
+                    <div data-test="check" class="checkSideMenuOptionType hide">
                         <ion-icon name="checkmark-sharp"></ion-icon>
                     </div>                                        
                 </div>
 
                 <div class="sideMenuOption">
-                    <div onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
+                    <div data-test="private" onclick="choiceMessageType(this)" class="iconUserSideMenuOption">
                         <div class="iconPrivate">
                             <ion-icon name="lock-closed"></ion-icon>
                         </div>
                         <div class="textType">Reservadamente</div>   
                     </div>
-                    <div class="checkSideMenuOptionType">
+                    <div data-test="check" class="checkSideMenuOptionType">
                         <ion-icon name="checkmark-sharp"></ion-icon>
                     </div>               
                 </div>
@@ -385,6 +404,7 @@ function sendMessageTo(thisUser){
     // console.log(elementUser);
     messageTo = elementUser;
     plotSideMenu();
+    sendToWho();
 }
 
 function choiceMessageType(thisType){
@@ -396,12 +416,23 @@ function choiceMessageType(thisType){
     // messageTo = elementUser;
     if(elementType == "Público"){
         messageType = "message";
+        messageTypeHigh =  "Público";
     }
     else if (elementType == "Reservadamente"){
         messageType = "private_message";
+        messageTypeHigh =  "Reservadamente";
     }
     // messageType
-    plotSideMenu();        
+    plotSideMenu(); 
+    sendToWho()       
+}
+
+function sendToWho(){
+    const elementToFrom = document.querySelector(".toFromType")
+    console.log(elementToFrom);    
+    elementToFrom.innerHTML = `
+    Enviando para ${messageTo} (${messageTypeHigh})   
+    `;
 }
 
 function openSideMenu(){

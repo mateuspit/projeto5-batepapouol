@@ -19,7 +19,7 @@
                 <div class="logoUol">
                     <img src="./img/logo1.png" alt="Logo UOL">
                 </div>
-                <div class="iconPeople" onclick="openSideMenu()">
+                <div data-test="open-participants" class="iconPeople" onclick="openSideMenu()">
                     <ion-icon name="people"></ion-icon>
                 </div>
             </header>
@@ -28,6 +28,9 @@
             <footer>
                 <div class="writeSpace">
                     <input data-test="input-message" type="text" id="textWrited" placeholder="Escreva aqui..." />
+                    <div data-test="recipient" class="toFromType">
+                        Enviando para Todos (Público)
+                    </div>
                 </div>
                 <div class="sendButton" onclick="sendMessage()" data-test="send-message">
                     <ion-icon name="paper-plane-outline"></ion-icon>
@@ -35,7 +38,7 @@
             </footer>
         </div>
         <div class="secondLayer hide">
-            <div onclick="closeSideMenu()" class="blackTransparent">                
+            <div data-test="overlay" onclick="closeSideMenu()" class="blackTransparent">                
             </div>            
             <div class="sideMenu">
                 <!-- <div class="headerSideMenu">
@@ -126,10 +129,10 @@
                 <div class="nickAlreadyUsed hide">
                     Escolha outro nick, este está em uso.
                 </div>
-                <div class="inputLogin">
+                <div data-test="input-name" class="inputLogin">
                     <input id="nickInput" type="text" placeholder="Digite seu nome" />
                 </div>    
-                <div onclick="nickAnalyze()"class="buttonLogin">
+                <div data-test="send-name" onclick="nickAnalyze()"class="buttonLogin">
                     Entrar
                 </div>
                 <div class="gifAndTextLoading hide">

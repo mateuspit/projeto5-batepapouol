@@ -28,7 +28,13 @@ function keepingOnline(){
     // console.log("Mantendo online"); 
     // console.log(lindoNome.name);
     lindoNomePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', lindoNome); //Mandando aviso que o nick escolhido ainda esta online
+    lindoNomePromise.catch(sendMessageErrorResponse);
 }
+
+// function reloadWindow(){
+//     debugger;
+
+// }
 
 function lindoNomeSucessResponse(){
     const elementFirstLayer = document.querySelector(".firstLayer");
@@ -208,6 +214,8 @@ function sendMessage(){
 
 
 function sendMessageErrorResponse(){
+    // debugger;
+
     window.location.reload();
 }
 

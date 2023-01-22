@@ -28,13 +28,13 @@ body{
 
 .blackTransparent{
     width: 100px;
-    height: 200vw;
+    height: 500vw;
     background-color: rgba(0,0,0,0.5);
 }
 
 .sideMenu{
     width: 275px;
-    height: 200vw;
+    height: 500vw;
     background-color: white;
 }
 
@@ -220,7 +220,7 @@ footer{
 }
 
 footer input{
-    background-color: none;
+    background-color: white;
     border: none;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;

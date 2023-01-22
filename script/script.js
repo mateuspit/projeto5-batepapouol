@@ -12,8 +12,8 @@ function lindoNomeErrorResponse(){
     // lindoNomePromise = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', lindoNome); //Tentativa de entrar com outro nome    
     // lindoNomePromise.then(lindoNomeSucessResponse); //Analisar sucesso
     // lindoNomePromise.catch(lindoNomeErrorResponse); //Analisar erro
-    alert("Este nome já está em uso!");
-    window.location.reload();
+    // alert("Este nome já está em uso!");
+    // window.location.reload();
     const elementTagNickError = document.querySelector(".nickAlreadyUsed");
     elementTagNickError.classList.remove("hide");
     const elementLoading = document.querySelector(".gifAndTextLoading")

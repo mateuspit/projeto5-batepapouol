@@ -83,6 +83,7 @@ body{
     display: flex;
     margin-left: 18px;
     justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 
@@ -155,6 +156,14 @@ body{
     border-radius: 4px;    
 }
 
+.inputLogin:hover{
+    border: 2px solid black;
+}
+
+.sideMenuOption:hover{
+    background-color: #aaaaaa;
+}
+
 .buttonLogin{
     cursor: pointer;
     margin-top: 15px;
@@ -169,6 +178,11 @@ body{
     color:  #696969;
     font-weight: 400;
     border-radius: 9px;    
+}
+
+.buttonLogin:hover{
+    background-color: black; 
+    color:  yellow;   
 }
 
 
